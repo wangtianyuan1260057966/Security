@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.SignInfoMapper">
+
+    <resultMap id="signInfoMapper" type="com.tencent.wxcloudrun.model.SignInfo">
+        <id property="ID" column="ID"/>
+        <result property="openid" column="openid"/>
+        <result property="DEPARTMENT" column="DEPARTMENT"/>
+        <result property="company" column="company"/>
+        <result property="userName" column="user_name"/>
+        <result property="userJob" column="user_job"/>
+        <result property="userSign" column="user_sign"/>
+        <result property="signTime" column="sign_time" javaType="java.time.LocalDateTime"  />
+    </resultMap>
+
+    <select id="getId" resultMap="countersMapper" parameterType="com.tencent.wxcloudrun.model.SignInfo">
+        SELECT `id`
+        FROM BO_EU_SECURITY_SIGN_INFO
+        WHERE OPENID = #{openid} and DEPARTMENT = #{department} and SIGN_TIME >= #{signTime}
+    </select>
+
+    <delete id="clearCount" parameterType="java.lang.Integer">
+        DELETE
+        FROM Counters
+        where id = #{id}
+        limit 1
+    </delete>
+
+    <update id="upsertCount" parameterType="com.tencent.wxcloudrun.model.Counter">
+        INSERT INTO `Counters`(`id`, `count`)
+        VALUE(#{id}, #{count}) 
+        ON DUPLICATE KEY UPDATE count=#{count}
+    </update>
+
+</mapper>

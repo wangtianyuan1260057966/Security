@@ -50,6 +50,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+
+            <!-- 添加fastjson依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.78</version> <!-- 请使用最新的版本号 -->
+            </dependency>
+            <!-- 其他依赖 -->
+
     </dependencies>
 
     <build>
