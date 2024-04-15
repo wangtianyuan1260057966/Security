@@ -6,6 +6,7 @@ import com.tencent.wxcloudrun.dto.CounterRequest;
 import com.tencent.wxcloudrun.dto.SignInfoRequest;
 import com.tencent.wxcloudrun.service.MobileService;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,9 +17,9 @@ public class MobileController {
     final MobileService mobileService;
     final Logger logger;
 
-    public MobileController(MobileService mobileService, Logger logger) {
+    public MobileController(MobileService mobileService) {
         this.mobileService = mobileService;
-        this.logger = logger;
+        this.logger = LoggerFactory.getLogger(CounterController.class);;
     }
 
 
