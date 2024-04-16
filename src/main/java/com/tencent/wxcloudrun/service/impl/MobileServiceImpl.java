@@ -3,6 +3,7 @@ package com.tencent.wxcloudrun.service.impl;
 import com.alibaba.fastjson.JSONArray;
 import com.tencent.wxcloudrun.config.ApiResponse;
 import com.tencent.wxcloudrun.dao.SignInfoMapper;
+import com.tencent.wxcloudrun.dto.SignInfoRequest;
 import com.tencent.wxcloudrun.model.SignInfo;
 import com.tencent.wxcloudrun.service.MobileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 
 @Service
@@ -38,32 +40,21 @@ public class MobileServiceImpl implements MobileService {
         return id!=null;
     }
 
-    public ApiResponse save(String data) {
-//        ResponseObject responseObject = ResponseObject.newOkResponse();
-//        Map<String, String> datas = (Map<String, String>) JSONArray.parse(data);
-//        String openId = getOpenId(datas.get("code"));
-//        String dept = datas.get("dept");
-//        String path = saveImg(datas.get("userSign"));
-//        List<RowMap> maps = DBSql.getMaps("select * from BO_EU_SECURITY_SIGN_INFO where OPENID = ? and DEPARTMENT = ?", new Object[]{openId, dept});
-//        if (maps != null && maps.size() > 0) {
-//            DBSql.update("update BO_EU_SECURITY_SIGN_INFO set company = ?,user_name = ?, user_job = ?,user_sign = ?, sign_time = ? where openid = ? and DEPARTMENT = ?",
-//                    new Object[]{datas.get("company"), datas.get("userName"), datas.get("userJob"), path, simpleDateFormat.format(new Date()), openId, dept});
-//        } else {
-//            BO bo = new BO();
-//            bo.set("DEPARTMENT", dept);
-//            bo.set("COMPANY", datas.get("company"));
-//            bo.set("USER_NAME", datas.get("userName"));
-//            bo.set("USER_JOB", datas.get("userJob"));
-//            bo.set("USER_SIGN", path);
-//            bo.set("OPENID", openId);
-//            bo.set("SIGN_TIME", simpleDateFormat.format(new Date()));
-//            ProcessInstance createBOProcessInstance = SDK.getProcessAPI().createBOProcessInstance(ProcessModel.NOTE_INFO_DWGROUPID, "admin", "");
-//
-//            String bindid = createBOProcessInstance.getId();
-//            SDK.getBOAPI().create("BO_EU_SECURITY_SIGN_INFO", bo, bindid, "admin");
-//        }
-//
-        return ApiResponse.ok();
+    public ApiResponse save(SignInfoRequest  data) {
+
+        String openId = getOpenId(data.getCode());
+        String dept = data.getDepartment();
+        String path = data.getUserSign();
+        SignInfo id = signInfoMapper.getIds(openId, dept);
+
+        if (id!=null) {
+            signInfoMapper.updateSign(data.getCompany(),data.getUserName(),data.getUserJob(),data.getUserSign(),data.getSignTime(),openId,dept);
+        } else {
+            String uuid = UUID.randomUUID().toString();
+            signInfoMapper.createSign(uuid,data.getCompany(),data.getUserName(),data.getUserJob(),data.getUserSign(),data.getSignTime(),openId,dept);
+        }
+
+        return ApiResponse.ok("succ");
     }
 
     public ApiResponse getNote(String dept) {

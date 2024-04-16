@@ -11,7 +11,11 @@ import java.util.Date;
 public interface SignInfoMapper {
     SignInfo getId(@Param("openId") String openId, @Param("department") String dept, @Param("signTime") Date signTime);
 
-    void upsertCount(Counter counter);
+    SignInfo getIds(@Param("openId") String openId, @Param("department") String dept);
 
-    void clearCount(@Param("id") Integer id);
+    int updateSign(@Param("company") String company,@Param("userName") String userName,@Param("userJob") String userJob,
+                   @Param("userSign") String userSign, @Param("signTime") Date signTime,@Param("openId") String openId, @Param("department") String dept);
+    int createSign(@Param("id") String id,@Param("company") String company,@Param("userName") String userName,@Param("userJob") String userJob,
+                        @Param("userSign") String userSign, @Param("signTime") Date signTime,@Param("openId") String openId, @Param("department") String dept);
+
 }

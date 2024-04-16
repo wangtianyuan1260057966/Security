@@ -19,17 +19,25 @@
         WHERE OPENID = #{openId} and DEPARTMENT = #{department} and SIGN_TIME >= #{signTime}
     </select>
 
-    <delete id="clearCount" parameterType="java.lang.Integer">
-        DELETE
-        FROM Counters
-        where id = #{id}
-        limit 1
-    </delete>
+    <select id="getIds" resultMap="signInfoMapper" parameterType="com.tencent.wxcloudrun.model.SignInfo">
+        SELECT `id`
+        FROM BO_EU_SECURITY_SIGN_INFO
+        WHERE OPENID = #{openId} and DEPARTMENT = #{department}
+    </select>
 
-    <update id="upsertCount" parameterType="com.tencent.wxcloudrun.model.Counter">
-        INSERT INTO `Counters`(`id`, `count`)
-        VALUE(#{id}, #{count}) 
-        ON DUPLICATE KEY UPDATE count=#{count}
+
+    <update id="updateSign" parameterType="com.tencent.wxcloudrun.model.SignInfo">
+        update BO_EU_SECURITY_SIGN_INFO
+        set company = #{company},user_name = #{userName}, user_job = #{userJob},user_sign = #{userSign}, sign_time = #{signTime}
+        where openid = #{openId} and DEPARTMENT = #{department}
+
     </update>
+
+    <insert id="createSign" parameterType="com.tencent.wxcloudrun.model.SignInfo">
+        insert into BO_EU_SECURITY_SIGN_INFO
+        (id,company,user_name,user_job,user_sign,sign_time,openid,DEPARTMENT)
+        values (#{id},#{company},  #{userName},   #{userJob},  #{userSign},   #{signTime},#{openId} , #{department})
+
+    </insert>
 
 </mapper>

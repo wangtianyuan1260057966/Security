@@ -29,7 +29,7 @@ public class MobileController {
         return mobileService.firstCheck(request.getDepartment(),request.getCode());
     }
     @PostMapping(value = "/api/save")
-    ApiResponse save(@RequestBody String data) {
+    ApiResponse save(@RequestBody SignInfoRequest data) {
 
         return mobileService.save(data);
     }
