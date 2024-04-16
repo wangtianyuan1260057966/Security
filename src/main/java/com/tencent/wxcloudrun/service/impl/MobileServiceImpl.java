@@ -35,7 +35,7 @@ public class MobileServiceImpl implements MobileService {
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, -30);
         SignInfo id = signInfoMapper.getId(openId, dept, calendar.getTime());
-        return id.getId().isEmpty();
+        return id!=null;
     }
 
     public ApiResponse save(String data) {

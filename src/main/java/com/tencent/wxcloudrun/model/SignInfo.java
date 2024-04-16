@@ -3,7 +3,8 @@ package com.tencent.wxcloudrun.model;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
+
 
 @Data
 public class SignInfo implements Serializable {
@@ -17,7 +18,7 @@ public class SignInfo implements Serializable {
 
     private String userSign;
 
-    private  LocalDateTime signTime;
+    private Date signTime;
 
     private String openId;
     private String id;
