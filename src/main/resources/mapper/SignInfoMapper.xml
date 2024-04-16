@@ -13,10 +13,10 @@
         <result property="signTime" column="sign_time" javaType="java.time.LocalDateTime"  />
     </resultMap>
 
-    <select id="getId" resultMap="countersMapper" parameterType="com.tencent.wxcloudrun.model.SignInfo">
+    <select id="getId" resultMap="signInfoMapper" parameterType="com.tencent.wxcloudrun.model.SignInfo">
         SELECT `id`
         FROM BO_EU_SECURITY_SIGN_INFO
-        WHERE OPENID = #{openid} and DEPARTMENT = #{department} and SIGN_TIME >= #{signTime}
+        WHERE OPENID = #{openId} and DEPARTMENT = #{department} and SIGN_TIME >= #{signTime}
     </select>
 
     <delete id="clearCount" parameterType="java.lang.Integer">

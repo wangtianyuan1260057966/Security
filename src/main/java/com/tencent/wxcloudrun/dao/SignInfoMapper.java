@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Mapper
 public interface SignInfoMapper {
-    SignInfo getId(@Param("openId") String openId, @Param("dept") String dept, @Param("signTime") Date signTime);
+    SignInfo getId(@Param("openId") String openId, @Param("department") String dept, @Param("signTime") Date signTime);
 
     void upsertCount(Counter counter);
 
