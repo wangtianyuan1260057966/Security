@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.LoginInfoMapper">
+
+    <resultMap id="LoginInfoMapper" type="com.tencent.wxcloudrun.model.OaCode">
+        <id property="ID" column="ID"/>
+        <result property="openid" column="OPEN_ID"/>
+        <result property="ownerLab" column="OWNER_LAB"/>
+        <result property="oaCode" column="OA_CODE"/>
+
+    </resultMap>
+
+    <select id="getLab" resultMap="LoginInfoMapper" parameterType="com.tencent.wxcloudrun.model.OaCode">
+        SELECT `OWNER_LAB`
+        FROM bo_eu_mobile_userinfo
+        WHERE OPEN_ID = #{openId}
+    </select>
+
+    <select id="getUser" resultMap="LoginInfoMapper" parameterType="com.tencent.wxcloudrun.model.OaCode">
+        SELECT `OA_CODE`,`OWNER_LAB`
+        FROM bo_eu_mobile_userinfo
+        WHERE OPEN_ID = #{openId}
+    </select>
+
+    <select id="getOpenId" resultMap="LoginInfoMapper" parameterType="com.tencent.wxcloudrun.model.OaCode">
+        SELECT `OPEN_ID`
+        FROM bo_eu_mobile_userinfo
+        WHERE OA_CODE = #{oaCode}
+    </select>
+
+
+    <update id="setLab" parameterType="com.tencent.wxcloudrun.model.OaCode">
+        update bo_eu_mobile_userinfo
+        set OWNER_LAB = #{ownerLab}
+        where OPEN_ID = #{openId}
+
+    </update>
+
+    <insert id="createLogin" parameterType="com.tencent.wxcloudrun.model.OaCode">
+        insert into bo_eu_mobile_userinfo
+        (id,OPEN_ID,OA_CODE)
+        values (#{id},#{openId} , #{oaCode})
+
+    </insert>
+
+</mapper>

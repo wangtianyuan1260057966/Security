@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.OrgDepartmentMapper">
+
+    <resultMap id="OrgDepartmentMapper" type="com.tencent.wxcloudrun.model.OrgDepartment">
+        <id property="ID" column="ID"/>
+        <result property="departmentNo" column="departmentno"/>
+
+        <result property="departmentName" column="departmentname"/>
+        <result property="outerId" column="outerid"/>
+
+    </resultMap>
+
+    <select id="getDept" resultMap="OrgDepartmentMapper" parameterType="com.tencent.wxcloudrun.model.OrgDepartment">
+        SELECT `DEPARTMENTNAME`,`outerid`
+        FROM orgdepartment
+        WHERE DEPARTMENTNO!='' order by DEPARTMENTNAME
+    </select>
+
+    <select id="getRegion" resultMap="OrgDepartmentMapper" parameterType="com.tencent.wxcloudrun.model.OrgDepartment">
+        SELECT `DEPARTMENTNAME`, `DEPARTMENTNO`
+        FROM orgdepartment
+        WHERE DEPARTMENTNO != '' AND EXT1 = #{region} order by DEPARTMENTNAME
+    </select>
+
+
+
+
+    <!--    <update id="updateSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        update BO_EU_SECURITY_SIGN_INFO-->
+<!--        set company = #{company},user_name = #{userName}, user_job = #{userJob},user_sign = #{userSign}, sign_time = #{signTime}-->
+<!--        where openid = #{openId} and DEPARTMENT = #{department}-->
+
+<!--    </update>-->
+
+<!--    <insert id="createSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        insert into BO_EU_MOBILE_USERINFO-->
+<!--        (id,OPEN_ID,OA_CODE)-->
+<!--        values (#{id},#{openId} , #{oaCode})-->
+
+<!--    </insert>-->
+
+</mapper>

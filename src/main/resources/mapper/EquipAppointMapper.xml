@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.EquipAppointMapper">
+
+    <resultMap id="EquipAppointMapper" type="com.tencent.wxcloudrun.model.EquipAppoint">
+        <id property="ID" column="ID"/>
+        <result property="subscriber" column="SUBSCRIBER"/>
+        <result property="equipNo" column="EQUIP_NO"/>
+        <result property="endTime" column="END_TIME"/>
+        <result property="customerName" column="CUSTOMER_NAME"/>
+        <result property="appointTime" column="APPOINT_TIME"/>
+        <result property="beginTime" column="BEGIN_TIME"/>
+        <result property="isCancel" column="IS_CANCEL"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="equipArea" column="EQUIP_AREA"/>
+        <result property="equipName" column="EQUIP_NAME"/>
+        <result property="equipOwner" column="EQUIP_OWNER"/>
+
+    </resultMap>
+
+    <select id="getAppoint" resultMap="EquipAppointMapper" parameterType="com.tencent.wxcloudrun.model.EquipAppoint">
+        SELECT *
+        from bo_eu_equipment_appointment
+        where `EQUIP_NO` = #{equipNo} and IS_CANCEL = 'false' and END_TIME >= #{endTime} order by CREATEDATE
+
+    </select>
+
+    <insert id="appointEquip" parameterType="com.tencent.wxcloudrun.model.EquipAppoint">
+        insert into bo_eu_equipment_appointment
+        (id,EQUIP_NO,SUBSCRIBER,END_TIME,CUSTOMER_NAME,APPOINT_TIME,BEGIN_TIME,IS_CANCEL,USER_ID,EQUIP_AREA,EQUIP_NAME,EQUIP_OWNER)
+        values (#{id},#{equipNo},  #{subscriber},#{endTime}, #{customerName},  #{appointTime},#{beginTime},#{isCancel} , #{userId},#{equipArea},#{equipName},#{equipOwner})
+
+    </insert>
+</mapper>

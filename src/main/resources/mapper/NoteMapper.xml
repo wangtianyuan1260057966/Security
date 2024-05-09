@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.NoteMapper">
+
+    <resultMap id="NoteMapper" type="com.tencent.wxcloudrun.model.Note">
+        <id property="ID" column="ID"/>
+        <result property="openId" column="OPENID"/>
+        <result property="dept" column="dept"/>
+        <result property="otherNote" column="OTHER_NOTE"/>
+        <result property="note" column="NOTE"/>
+        <result property="changeTime" column="CHANGE_TIME" javaType="java.time.LocalDateTime"/>
+    </resultMap>
+
+    <select id="getTemp" resultMap="NoteMapper" parameterType="com.tencent.wxcloudrun.model.Note">
+        SELECT `OTHER_NOTE`
+        FROM security_note
+        WHERE dept = #{dept} order by CHANGE_TIME desc limit 1
+    </select>
+
+    <select id="getPreview" resultMap="NoteMapper" parameterType="com.tencent.wxcloudrun.model.Note">
+        SELECT `id`
+        FROM security_note
+        WHERE dept = #{dept}
+    </select>
+
+    <update id="updateNote" parameterType="com.tencent.wxcloudrun.model.Note">
+        update security_note
+        set note = #{note},OTHER_NOTE = #{otherNote},CHANGE_TIME=#{changeTime},openid = #{openId}
+        where dept = #{dept}
+
+    </update>
+
+    <insert id="insertNote" parameterType="com.tencent.wxcloudrun.model.Note">
+        insert into security_note
+        (id,note,OTHER_NOTE,dept,CHANGE_TIME,openid)
+        values (#{id},#{note},  #{otherNote}, #{dept},#{changeTime},#{openId})
+
+    </insert>
+
+
+</mapper>

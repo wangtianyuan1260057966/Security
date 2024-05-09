@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.EquipAreaMapper">
+
+    <resultMap id="EquipAreaMapper" type="com.tencent.wxcloudrun.model.EquipArea">
+        <id property="ID" column="ID"/>
+        <result property="equipArea" column="EQUIP_AREA"/>
+
+
+    </resultMap>
+
+    <select id="getArea" resultMap="EquipAreaMapper" parameterType="com.tencent.wxcloudrun.model.EquipArea">
+        SELECT distinct `EQUIP_AREA`
+        FROM bo_eu_equipment_area
+
+    </select>
+
+
+</mapper>

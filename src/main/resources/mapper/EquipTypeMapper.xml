@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.EquipTypeMapper">
+
+    <resultMap id="EquipTypeMapper" type="com.tencent.wxcloudrun.model.EquipType">
+        <id property="ID" column="ID"/>
+        <result property="equipType" column="EQUIP_TYPE"/>
+
+
+    </resultMap>
+
+    <select id="getType" resultMap="EquipTypeMapper" parameterType="com.tencent.wxcloudrun.model.EquipType">
+        SELECT distinct `EQUIP_TYPE`
+        FROM bo_eu_equipment_type
+
+    </select>
+
+
+</mapper>

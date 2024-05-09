@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.ViewUserMapper">
+
+    <resultMap id="ViewUserMapper" type="com.tencent.wxcloudrun.model.ViewUser">
+        <id property="ID" column="ID"/>
+        <result property="departmentNo" column="departmentno"/>
+        <result property="departmentZone" column="departmentzone"/>
+        <result property="departmentName" column="departmentname"/>
+        <result property="outerId" column="outerid"/>
+        <result property="userId" column="userid"/>
+
+    </resultMap>
+
+    <select id="getDeptZone" resultMap="ViewUserMapper" parameterType="com.tencent.wxcloudrun.model.ViewUser">
+        SELECT `DEPARTMENTZONE`
+        FROM view_eu_user
+        WHERE userid = #{userId}
+    </select>
+
+
+
+
+
+
+    <!--    <update id="updateSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        update BO_EU_SECURITY_SIGN_INFO-->
+<!--        set company = #{company},user_name = #{userName}, user_job = #{userJob},user_sign = #{userSign}, sign_time = #{signTime}-->
+<!--        where openid = #{openId} and DEPARTMENT = #{department}-->
+
+<!--    </update>-->
+
+<!--    <insert id="createSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        insert into BO_EU_MOBILE_USERINFO-->
+<!--        (id,OPEN_ID,OA_CODE)-->
+<!--        values (#{id},#{openId} , #{oaCode})-->
+
+<!--    </insert>-->
+
+</mapper>

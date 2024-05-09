@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tencent.wxcloudrun.dao.OrgUserMapper">
+
+    <resultMap id="OrgUserMapper" type="com.tencent.wxcloudrun.model.OrgUser">
+        <id property="ID" column="ID"/>
+        <result property="userId" column="userid"/>
+
+        <result property="userName" column="username"/>
+
+    </resultMap>
+
+    <select id="getUser" resultMap="OrgUserMapper" parameterType="com.tencent.wxcloudrun.model.OrgUser">
+        SELECT `userid`
+        FROM orguser
+        WHERE userid = #{userId}
+    </select>
+    <select id="getUserName" resultMap="OrgUserMapper" parameterType="com.tencent.wxcloudrun.model.OrgUser">
+        SELECT `username`
+        FROM orguser
+        WHERE userid = #{userId}
+    </select>
+
+
+<!--    <update id="updateSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        update BO_EU_SECURITY_SIGN_INFO-->
+<!--        set company = #{company},user_name = #{userName}, user_job = #{userJob},user_sign = #{userSign}, sign_time = #{signTime}-->
+<!--        where openid = #{openId} and DEPARTMENT = #{department}-->
+
+<!--    </update>-->
+
+<!--    <insert id="createSign" parameterType="com.tencent.wxcloudrun.model.OaCode">-->
+<!--        insert into BO_EU_MOBILE_USERINFO-->
+<!--        (id,OPEN_ID,OA_CODE)-->
+<!--        values (#{id},#{openId} , #{oaCode})-->
+
+<!--    </insert>-->
+
+</mapper>

@@ -16,7 +16,8 @@ public class SignInfoRequest {
   private String company;
   private String userName;
   private String userJob;
-  private Date signTime;
+  private String signTime;
+  private String endTime;
   private String id;
 
 }
